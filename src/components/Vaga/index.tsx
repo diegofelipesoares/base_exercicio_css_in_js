@@ -11,31 +11,45 @@ type Props = {
 }
 
 const VagaContainer = styled.li`
-  list-style: none;
-  margin: 16px 0;
+  border: 1px solid var(--cor-principal);
+  background-color: var(--cor-secundaria);
+  color: var(--cor-principal);
   padding: 16px;
-  border: 1px solid #ccc;
+  transition: all ease 0.3s;
   border-radius: 8px;
-  background-color: #f9f9f9;
+
+  &:hover {
+    background-color: var(--cor-principal);
+    color: var(--cor-secundaria);
+
+    a {
+      border-color: var(--cor-principal);
+      background-color: var(--cor-secundaria);
+      color: var(--cor-principal);
+    }
+  }
 `
 
 const VagaTitulo = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 8px;
-  color: #333;
+  font-weight: bold;
+  margin-bottom: 16px;
 `
 
 const VagaLink = styled.a`
+  border-color: var(--cor-secundaria);
+  background-color: var(--cor-principal);
+  color: var(--cor-secundaria);
   display: inline-block;
-  margin-top: 16px;
   padding: 8px 16px;
-  background-color: #007bff;
-  color: #fff;
   text-decoration: none;
-  border-radius: 4px;
+  margin-top: 16px;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 8px;
+  text-align: center;
 
-  &:hover {
-    background-color: #0056b3;
+  @media (max-width: 768px) {
+    display: block;
   }
 `
 
@@ -43,9 +57,9 @@ const Vaga = (props: Props) => (
   <VagaContainer>
     <VagaTitulo>{props.titulo}</VagaTitulo>
     <ul>
-      <li>Localizacao: {props.localizacao}</li>
+      <li>Localização: {props.localizacao}</li>
       <li>Senioridade: {props.nivel}</li>
-      <li>Tipo de contratacao: {props.modalidade}</li>
+      <li>Tipo de contratação: {props.modalidade}</li>
       <li>
         Salário: {props.salarioMin} - {props.salarioMax}
       </li>

@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react'
-import styled, { StyledComponent } from 'styled-components'
+import styled from 'styled-components'
 
 type Props = {
   aoPesquisar: (termo: string) => void
@@ -15,6 +15,7 @@ const Hero = ({ aoPesquisar }: Props) => {
 
   return (
     <StyledHero>
+      <Overlay />
       <HeroContent>
         <HeroTitle>
           As melhores vagas para tecnologia, design e artes visuais.
@@ -37,31 +38,53 @@ const StyledHero = styled.section`
   width: 100%;
   background-image: url('https://cdn.pixabay.com/photo/2018/08/10/15/45/woman-3597101_1280.jpg');
   background-size: cover;
-  background-position: center;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+
+  @media (max-width: 768px) {
+    height: auto;
+    padding: 24px 0;
+  }
+`
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--cor-principal);
+  content: '';
+  opacity: 0.7;
 `
 
 const HeroContent = styled.div`
+  position: relative;
+  color: #eee;
   text-align: center;
-  color: var(--cor-secundaria);
 `
 
 const HeroTitle = styled.h1`
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 24px;
+  font-family: Gloock, serif;
+  font-size: 48px;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
 `
 
-const StyledForm: StyledComponent<string, any, {}, never> = styled.form`
+const StyledForm = styled.form.attrs({
+  role: 'form'
+})<React.FormHTMLAttributes<HTMLFormElement>>`
   display: flex;
   justify-content: center;
   gap: 8px;
 `
 
-const StyledInput: StyledComponent<string, any, {}, never> = styled.input`
+const StyledInput = styled.input.attrs({
+  type: 'search'
+})<React.InputHTMLAttributes<HTMLInputElement>>`
   padding: 8px 16px;
   border: 1px solid var(--cor-principal);
   border-radius: 4px;
@@ -69,7 +92,9 @@ const StyledInput: StyledComponent<string, any, {}, never> = styled.input`
   font-size: 16px;
 `
 
-const StyledButton = styled.button`
+const StyledButton = styled.button.attrs({
+  type: 'submit'
+})<React.ButtonHTMLAttributes<HTMLButtonElement>>`
   background-color: var(--cor-principal);
   border: none;
   border-radius: 4px;
